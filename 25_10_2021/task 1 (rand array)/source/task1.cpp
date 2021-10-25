@@ -6,7 +6,8 @@
 int main()
 {
     int a[10];
-    int i, min;
+    int i, min, sum=0, k=-1;
+    double average;
     min = 1000;
 
     srand(time(0)); 
@@ -17,12 +18,17 @@ int main()
         if (a[i] < min)
         {
             min = a[i];
+            k = i+1; // запоминаем номер минимального элемента
         }
+        sum += a[i];
     }
+    average = (double)sum / 10;
     for (i = 0; i < 10; i++)
         std::cout << a[i] << " ";
 
-    std::cout << "\n" << "min = " << min;
+    std::cout << "\n" << "min = " << min << " and his number = " << k<<"\n";
+    std::cout <<  "average = " << average << " and sum = " << sum;
+
 }
 
 
