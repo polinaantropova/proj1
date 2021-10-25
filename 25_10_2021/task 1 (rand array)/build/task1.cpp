@@ -3,6 +3,7 @@
 
 #include <iostream>
 
+
 int main()
 {
     int a[10];
@@ -11,6 +12,7 @@ int main()
     min = 1000;
 
     srand(time(0)); 
+    
 
    //случайный массив из 10 элементов от 1 до 900
     for (i = 0; i < 10; ++i) {
@@ -23,11 +25,28 @@ int main()
         sum += a[i];
     }
     average = (double)sum / 10;
-    for (i = 0; i < 10; i++)
+    for (i = 0; i < 10; ++i)
         std::cout << a[i] << " ";
 
-    std::cout << "\n" << "min = " << min << " and his number = " << k<<"\n";
+
+    // расположение элементов массива в обратном порядке
+    int n = 10, h = 0;
+    for (i = 0; i < n / 2; ++i)
+
+    {
+        h = a[i];
+        a[i] = a[n - 1 - i];
+        a[n - 1 - i] = h;
+
+
+    }
+
+    std::cout << "\n" << "min = " << min << " and his number = " << k << "\n";
     std::cout <<  "average = " << average << " and sum = " << sum;
+    std::cout <<"\n" << "return array : " << "\n";
+
+    for (i = 0; i < 10; ++i)
+        std::cout << a[i] << " ";
 
 }
 
