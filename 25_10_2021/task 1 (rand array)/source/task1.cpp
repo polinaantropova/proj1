@@ -40,13 +40,37 @@ int main()
 
 
     }
+    // сортировка массива по среднему значению
+    int tmp = 0, lesscounter = 0;
+    for (int i = 0; i < n; ++i) {
+        if (a[i] < average)
+            lesscounter += 1;
+    }
+    //std::cout << "lesscounter = " << lesscounter << std::endl;
+    int j = 0;
+    for (int i = 0; i < lesscounter; ++i) {
+        while (a[i] > average) {
+            tmp = a[i];
+            a[i] = a[n - 1 - j];
+            a[n - 1 - j] = tmp;
+            j += 1;
+        }
+
+    }
+    
 
     std::cout << "\n" << "min = " << min << " and his number = " << k << "\n";
-    std::cout <<  "average = " << average << " and sum = " << sum;
-    std::cout <<"\n" << "return array : " << "\n";
+    std::cout <<  "average = " << average << " and sum = " << sum<<"\n";
+    std::cout << "after swap by average " << std::endl;
+    for (int i = 0; i < n; ++i) {
+        std::cout << a[i] << " ";
+    }
+    std::cout << std::endl;
+    std::cout << "number of comparisons = " << j << std::endl << std::endl;
+    /*std::cout << "\n" << "return array : " << "\n";
 
     for (i = 0; i < 10; ++i)
-        std::cout << a[i] << " ";
+        std::cout << a[i] << " ";*/
 
 }
 
