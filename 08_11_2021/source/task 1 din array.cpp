@@ -12,22 +12,69 @@ int** create(int row, int column) {
     return A;
 }
 
-void initialize (int **A, int row, int column, int start1) {
+void initialize(int** A, int row, int column, int start1) {
     for (int i = 0; i < row; ++i) {
         for (int j = 0; j < column; ++j) {
-            A[i][j] = start1 + i + j;
+            
+            A[i][j] = start1;
+            ++start1;
             std::cout << A[i][j] << "\t";
         }
         std::cout << std::endl;
     }
 }
+// квадратная спираль
+void createSpiral (int** A, int row, int column, int start1) {
+    
+        for (int i = 0; i < column/2 +1; ++i) {
 
-void initialize2(int** A, int row, int column, int start2) {
+        for (int j = i; j < column-i; ++j) {
+            
+            A[i][j] = start1++;
+        }
+       
+        for (int k = i+1; k < column - i; ++k) {
+
+            A[k][column -1 -i] = start1++;
+        }
+
+        for (int j = column -i-2; j >=i; --j) {
+
+            A[column-i-1][j] = start1++;
+        }
+
+        for (int k = column -2 -i; k > i; --k) {
+
+            A[k][i] = start1++;
+        }    
+    }
+        
+}
+// змейка
+void createSnake(int** A, int row, int column, int start1) {
+
+    for (int i = 0; i < row; ++i) {
+        if (i % 2 == 0) {
+            for (int j =0; j < column; ++j) {
+                A[i][j] = start1++;
+            }
+        }
+        if (i % 2 != 0) {
+            for (int j = column-1; j >= 0; --j) {
+
+                A[i][j] = start1++;
+            }
+        }
+  
+    }
+
+}
+
+
+void printArray(int** A, int row, int column) {
     for (int i = 0; i < row; ++i) {
         for (int j = 0; j < column; ++j) {
-            int k;
-            A[i][j] = start2;
-            ++start2;
+            
             std::cout << A[i][j] << "\t";
         }
         std::cout << std::endl;
@@ -35,7 +82,7 @@ void initialize2(int** A, int row, int column, int start2) {
 }
 
 int main()
-{
+{/*
     //одномерный динамический массив
     int razmer, start;
     std::cout << "razmer :\n";
@@ -52,7 +99,7 @@ int main()
         std::cout << a[i] << " ";
 
     delete[] a;
-    std::cout << std::endl;
+    std::cout << std::endl;*/
 
     //двумерный динамический массив
     int row, column, start1;
@@ -64,10 +111,17 @@ int main()
 
     int** A;
     A = create(row, column); 
+    std::cout << "arrage in order" << std::endl;
     initialize(A, row, column, start1); 
     std::cout << std::endl;
-    initialize2(A, row, column,start1);
-
+    std::cout << "arrage-spiral" << std::endl;
+    createSpiral(A, row, column, start1);
+    printArray(A, row, column);
+    std::cout << std::endl;
+    std::cout << "arrage-snake" << std::endl;
+    createSnake(A, row, column, start1);
+    printArray(A, row, column);
+    std::cout << std::endl;
     for (int i = 0; i < row; i++)
     {
         delete[] A[i];
