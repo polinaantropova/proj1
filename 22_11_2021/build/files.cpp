@@ -42,6 +42,87 @@ void initialize(int** A, int row, int column, int start1) {
         std::cout << std::endl;
     }
 }
+//"перевод" символов в двоичный код
+std::string binar(int c) {
+    int lin, counter = 0;
+    std::string itog;
+    char alph[] = { '0', '1' };
+    while (c > 0) {
+        lin = c % 2;
+        for (int i = 0; i <= 1; ++i) {
+            if (lin == i) {
+                itog += alph[i];
+                break;
+            }
+        }
+        counter += 1;
+        c /= 2;
+    }
+
+    for (int i = 0; i < counter / 2; ++i) {
+        std::swap(itog[i], itog[counter - 1 - i]);
+    }
+    unsigned int len = itog.length();
+    if (len < 8) {
+        for (int i = 0; i < 8 - len; ++i) {
+            itog = '0' + itog;
+        }
+    }
+    return itog;
+}
+
+void BinImage(int size) {
+    int count = 0;
+    std::ifstream inFile("C:\\Users\\Dell\\Desktop\\copy.txt", std::ios_base::binary);
+    if (inFile) {
+        std::cout << "file 1 opend!!! " << std::endl;
+
+        std::ofstream image("C:\\Users\\Dell\\Desktop\\image.txt" , std::ios_base::out);
+        if (image.is_open()) {
+            std::cout << "file 2 opend!!! " << std::endl;
+        }
+        while (true) {
+            char c = inFile.get();
+            if (inFile.eof()) break;
+           
+            
+
+            int razmer = (int)c;
+            std::string bn = binar(razmer);
+            unsigned long long len = bn.length();
+            for (int i = 0; i < len; ++i) {
+                if (bn[i] == '0') {
+                    if (count == size) {
+                        std::cout << std::endl;
+                        image << std::endl;
+                        count = 0;
+                    }
+                    std::cout << " ";
+                    image << ' ';
+                }
+                if (bn[i] == '1') {
+                    if (count == size) {
+                        std::cout << std::endl;
+                        image << std::endl;
+                        count = 0;
+                    }
+                    std::cout << "*";
+                    image << '*';
+                }
+                ++count;
+                
+            }
+            image.close();
+        }
+
+        
+
+    }
+
+    inFile.close();
+    
+}
+
 int main()
 {
     int row = 4;
@@ -143,5 +224,8 @@ int main()
             fs.close();
         }
         
+        
+
+        BinImage(15);
 }
 
