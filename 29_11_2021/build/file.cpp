@@ -33,6 +33,7 @@ void copyFile() {
     fs.close();
     std::cout << "copy finished! check your file!\n";
 }
+//смещения в файле
 //копирование файла с аргументами в main
 int main(int argc, char* argv[]) {
     //copyFile();
