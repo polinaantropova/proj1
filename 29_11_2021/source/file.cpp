@@ -4,7 +4,40 @@
 #include <iostream>
 #include <fstream>
 
+//поиск элемента в бинарном массиве
+void findElement() {
+    std::fstream fsa;
+    fsa.open("C:\\Users\\Dell\\source\\repos\\file\\binArray.txt", std::ios_base::in | std::ios_base::binary);
+    if (!fsa.is_open()) {
+        std::cout << "file can't be opened " << std::endl;
+    }
+    if (fsa.is_open()) {
+        std::cout << "file opened " << std::endl;
+        int c = fsa.get();
+        const int row = c;
+        c = fsa.get();
+        c = fsa.get();
+        const int column = c;
+        c = fsa.get();
 
+        int total = row * column;
+        int ind_row, ind_column;
+        std::cout << "input element's index : \n";
+        std::cin >> ind_row >> ind_column;
+
+        int ind = ind_row * column + ind_column;
+
+        fsa.seekg(ind, std::ios::cur);
+        
+        char el;
+        fsa.read(&el, sizeof(char));
+
+        std::cout << el << std::endl;
+    }
+        fsa.close();
+        std::cout << "search finished! check your file!\n";
+    
+}
 
 //копирование файла
 void copyFile() {
@@ -33,6 +66,7 @@ void copyFile() {
     fs.close();
     std::cout << "copy finished! check your file!\n";
 }
+
 //копирование файла с аргументами в main
 int main(int argc, char* argv[]) {
     //copyFile();
@@ -70,6 +104,8 @@ int main(int argc, char* argv[]) {
     }
     fs.close();
     std::cout << "copy finished! check your file!\n";
+
+    findElement();
     }
 
 
