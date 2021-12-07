@@ -14,6 +14,14 @@ void printArray(int** A, int row, int column) {
     }
 }
 
+void fillarrRandom(int** A, int row, int column) {
+    for (int i = 0; i < row; ++i) {
+        for (int j = 0; j < column; ++j) {
+            A[i][j] = rand() % 10;
+        }
+    }
+}
+
 //1.Создание 2-массива с заданными размерами.
 int** createArray(int row, int column) {
 
@@ -73,6 +81,21 @@ int** transMatrix(int** A, int row, int column) {
 
 //6.Модификация исходного 2 - массива в виде поворота на 180 градусов.
 
+int** return180Array(int** A, int row, int column) {
+    int** B;
+    B = new int* [row];
+    for (int i = 0; i < row; ++i) {
+        B[i] = new int[column];
+    }
+    for (int i = 0; i < row; ++i) {
+        for (int j = 0; j < column; ++j) {
+            B[i][j] = A[row - i - 1][column - j - 1];
+        }
+    }
+    return B;
+
+}
+
 //7.Умножение матрицы на число.
 int** productMatrix(int** A, int row, int column, int number) {
     for (int i = 0; i < row; ++i) {
@@ -109,6 +132,8 @@ void sumMatrix(int** A, int** B, int row, int column) {
 //11.Обмен местами двух строк / столбцов 2 - массива.
 //12.Получение доступа по ссылке к элементу 2 - массива с заданными значениями строки и столбца.
 
+
+
 int main()
 {
     int** A;
@@ -125,11 +150,21 @@ int main()
     
     initArrayOnlyConst(A, row, column, yr_const);
     printArray(A, row, column);
-    std::cout << std::endl;
+    std::cout << "---------------------------------------------------" << std::endl;
     B=CreateProductMatrix( A,row, column, 4);
     
     printArray(B, row, column);
-    std::cout << std::endl;
+    std::cout << "---------------------------------------------------" << std::endl;
+
+    A = createArray(row, column);
+
+    fillarrRandom(A, row, column);
+    printArray(A, row, column);
+    std::cout <<"---------------------------------------------------" << std::endl;
+
+    D= return180Array(A, row, column);
+    printArray(D, row, column);
+    std::cout << "---------------------------------------------------" << std::endl;
   
     deleteArray(B, row, column);
     deleteArray(A, row, column);
