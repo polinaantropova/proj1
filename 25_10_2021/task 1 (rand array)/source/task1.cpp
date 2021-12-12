@@ -3,6 +3,38 @@
 
 #include <iostream>
 
+void frequency(int* a, int size) {
+    //sort array
+    for (int k = 0; k < size - 1; ++k) {
+        int minl = k;
+        for (int l = k + 1; l < size; ++l) {
+            if (a[l] <= a[minl]) {
+                minl = l;
+            }
+        }
+        std::swap(a[k], a[minl]);
+    }
+    //search frequency element
+    int cur = 0;
+    int maxFrEl = 0;
+    int maxFr_cy = 1;
+    int curFr_cy = 1;
+    for (int i = 1; i < size; ++i) {
+        if (a[i] == cur) {
+            curFr_cy++;
+            if (curFr_cy > maxFr_cy) {
+                maxFr_cy = curFr_cy;
+                maxFrEl = i;
+            }
+        }
+        else {
+            cur = a[i];
+            curFr_cy = 1;
+        }
+    }
+    std::cout << "the most frequent element: " << a[maxFrEl] <<", number of repetitions: " << maxFr_cy << "\n";
+}
+
 
 int main()
 {
@@ -71,7 +103,13 @@ int main()
 
     for (i = 0; i < 10; ++i)
         std::cout << a[i] << " ";*/
-
+    frequency(a, 10);
+    
+    int b[10] = { 1,2,4,5,6,2,2,2,3,4 };
+    for (i = 0; i < 10; ++i)
+        std::cout << b[i] << " ";
+    std::cout << std::endl;
+    frequency(b, 10);
 }
 
 
