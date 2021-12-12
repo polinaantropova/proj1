@@ -107,6 +107,60 @@ int main(int argc, char* argv[]) {
 
         }
         break;
+
+    case 3:
+        std::cout << "image 32*32 to console\n" << std::endl;
+        if (fs.is_open()) {
+            std::cout << "file opened " << std::endl;
+
+            unsigned int bpp = 0;
+            fs.seekg(28);
+            fs.read((char*)&bpp, sizeof(int));
+            std::cout << "BPP " << bpp << std::endl;
+
+            //считываем информацию о ширине и высоте изображения
+            fs.seekg(18);
+            unsigned int width = 0, height = 0;
+            fs.read((char*)&width, sizeof(int));
+            fs.read((char*)&height, sizeof(int));
+            std::cout << "width  " << width << std::endl;
+            std::cout << "height " << height << std::endl;
+
+            int bitoffBits = 0;//bitoffBits
+            fs.seekg(10);
+            fs.read((char*)&bitoffBits, sizeof(int));
+            std::cout << "Read bitoffBits\t" << bitoffBits << std::endl;
+            fs.seekg(bitoffBits);
+
+            //выводим bmp-изображение в консоль (33*32)
+            for (size_t rows = 0; rows < height; ++rows) {
+                unsigned char ost = 0;
+                unsigned char toout = 0;
+                //выводим 32 бита
+                for (size_t cols = 0; cols < width-width%32; cols += 8) {
+                    unsigned char bTmp = 0;
+                    fs.read((char*)&bTmp, 1);
+                    if (fs.eof()) { break; }
+                
+                    for (unsigned char mask = 0x80; mask != 0; mask >>= 1) {
+                        std::cout << (((bTmp & mask) == 0) ? '1' : '0');
+                    }
+                }
+                //выводим остаток от деления на 32(содержат значимую информацию)
+                fs.read((char*)&ost, width%32);
+                for (unsigned char mask = 0x80; mask != 0; mask >>= 1) {
+                        std::cout << (((ost & mask) == 0) ? '1' : '0');
+                        break;
+                    }
+            //пропускаем незначимые данные   
+            for (int i = 0; i < 3; ++i) {
+                fs.read((char*)&toout, 1);
+            }
+                std::cout << std::endl;
+            }
+        }
+        break;
+
     case 6:
     {if (fs.is_open()) {
             std::cout << "file opened " << std::endl;
