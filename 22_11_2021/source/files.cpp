@@ -77,13 +77,13 @@ void BinImage(int size) {
     if (inFile) {
         std::cout << "file 1 opend!!! " << std::endl;
 
-        std::ofstream image("C:\\Users\\Dell\\Desktop\\image.txt" , std::ios_base::out);
+        std::ofstream image("C:\\Users\\Dell\\Desktop\\image.txt" , std::ios_base::out| std::ios_base::trunc| std::ios_base::binary);
         if (image.is_open()) {
             std::cout << "file 2 opend!!! " << std::endl;
         }
-        while (true) {
+        while (!inFile.eof()) {
             char c = inFile.get();
-            if (inFile.eof()) break;
+             
            
             
 
@@ -98,33 +98,42 @@ void BinImage(int size) {
                         count = 0;
                     }
                     std::cout << " ";
-                    image << ' ';
+                    image << " ";
                 }
                 if (bn[i] == '1') {
                     if (count == size) {
                         std::cout << std::endl;
-                        image << std::endl;
+                        image << '\n';
                         count = 0;
                     }
                     std::cout << "*";
-                    image << '*';
+                    image << "*";
                 }
                 ++count;
                 
             }
-            image.close();
+            
         }
 
         
-
+        image.close();
     }
-
+    
     inFile.close();
     
 }
 
-int main()
+int main(int argc, char* argv[] )
 {
+    std::cout << " argc= " << argc << std::endl;
+    std::cout << argv[0] << std::endl; 
+    for (size_t k = 1; k < argc; ++k) {
+        std::cout << argv[k] << std::endl;
+
+    }
+
+
+
     int row = 4;
     int column = 4;
     int start1 = 1;
@@ -134,7 +143,8 @@ int main()
    
     
     std::fstream fs;
-    fs.open("C:\\Users\\Dell\\Desktop\\file.txt",std::ios_base::in);
+    //"C:\\Users\\Dell\\Desktop\\file.txt"
+    fs.open(argv[1],std::ios_base::in);
     if (fs.is_open()) {
         std::cout << "file opend " << std::endl;
         
@@ -147,7 +157,8 @@ int main()
 
     
         std::fstream outFile;
-        outFile.open("C:\\Users\\Dell\\Desktop\\copy.txt", std::ios_base::out| std::ios_base::trunc);
+        //"C:\\Users\\Dell\\Desktop\\copy.txt"
+        outFile.open(argv[2], std::ios_base::out| std::ios_base::trunc);
         /*if (outFile.is_open()) {
             std::cout << "file opened " << std::endl;
 
