@@ -11,8 +11,8 @@ void printArray(int a[][4], const int row, const int column) {
         std::cout << std::endl;
     }
 }
-//массив, в котором поменяли строки
-void ArrayswapRow(int a[][4], const int row, const int column) {
+//массив, в котором поменяли столбцы
+void ArrayswapCol(int a[][4], const int row, const int column) {
     
     for (int i = 0; i < row; ++i)
     {
@@ -24,7 +24,8 @@ void ArrayswapRow(int a[][4], const int row, const int column) {
        
     }
 }
-void ArrayswapCol(int a[][4], const int row, const int column) {
+//массив, в котором поменяли строки
+void ArrayswapRow(int a[][4], const int row, const int column) {
     int j = 0;
     for (int i = 0; i < row / 2; ++i)
     {
