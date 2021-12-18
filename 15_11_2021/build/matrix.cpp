@@ -2,7 +2,7 @@
 //
 
 #include <iostream>
-//#include <matrix1.h>
+#include "matrix1.h"
 //print array
 void printArray(int** A, int row, int column) {
     for (int i = 0; i < row; ++i) {
@@ -21,6 +21,7 @@ void fillarrRandom(int** A, int row, int column) {
         }
     }
 }
+
 
 //1.Создание 2-массива с заданными размерами.
 int** createArray(int row, int column) {
@@ -44,8 +45,7 @@ void deleteArray(int** A, int row, int column) {
 }
 //3.Инициализация 2 - массива - все элементы одинаковы и равны заданному значению.
 void initArrayOnlyConst(int** A, int row, int column, int yr_const) {
-    std::cout << "input your const :\n";
-    std::cin >> yr_const;
+    
     for (int i = 0; i < row; ++i) {
         for (int j = 0; j < column; ++j) {
             A[i][j] = yr_const;
@@ -141,9 +141,7 @@ int** multMatrix(int** A,  int row1, int column1, int** B, int row2, int column2
     {
         std::cout << "Can't multiplication!!!";
         
-        
-        
-        return 0;
+        //return 0;
     }
     else {
         int** C;
@@ -206,6 +204,7 @@ int main()
     std::cout << "razmer row and column:\n";
     std::cin >> row >> column;
 
+
     V = createArray(row, column); 
     std::cout << "----------------------4.E matrix -------------------------------" << std::endl;
     D=eMatrix(V, row, column);
@@ -213,6 +212,8 @@ int main()
     std::cout << std::endl;
 
     std::cout << "----------------------3.const array---------------------------------" << std::endl;
+    std::cout << "input your const :\n";
+    std::cin >> yr_const;
     initArrayOnlyConst(V, row, column, yr_const);
     printArray(V, row, column);
 
@@ -303,4 +304,5 @@ int main()
     deleteArray(B, row, column);
     deleteArray(A, row, column);
 
+    
 }
