@@ -2,6 +2,7 @@
 void printArray(int** A, int row, int column);
 void fillarrRandom(int** A, int row, int column);
 int** createArray(int row, int column);
+int** createDependentArray(int row, int column);
 void deleteArray(int** A, int row, int column);
 void initArrayOnlyConst(int** A, int row, int column, int yr_const);
 int** eMatrix(int** A, int row, int column);
@@ -14,3 +15,4 @@ int** multMatrix(int** A, int row1, int column1, int** B, int row2, int column2)
 int** swapRows(int** A, int row, int column, int rowFirst, int rowSec);
 void swapColumns(int** A, int row, int column, int colFirst, int colSec);
 int& getElement(int** A, int yourRow, int yourColumn);
+int& getElement1(int** Da, int yourRow, int yourColumn);

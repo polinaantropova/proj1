@@ -35,6 +35,17 @@ int** createArray(int row, int column) {
     return A;
 }
 
+
+int** createDependentArray(int row, int column) {
+    int* a = new int[row * column]{ 0 };
+    int** A = new int * [row];
+    for (int i = 0, j = 0; i < row * column; i += column, j++)
+    {
+        A[j] = &a[i];
+    }
+    return A;
+}
+
 //2.Для независимого 2 - массива реализовать освобождение ресурсов, занимаемых данным массивом
 void deleteArray(int** A, int row, int column) {
     for (int i = 0; i < row; i++)
@@ -186,6 +197,11 @@ void swapColumns(int** A, int row, int column, int colFirst, int colSec) {
  int& getElement(int** A, int yourRow, int yourColumn) {
 return A[yourRow - 1][yourColumn - 1];
 }
+
+ int& getElement1(int** Da, int yourRow, int yourColumn) {
+     return Da[yourRow - 1][yourColumn - 1];
+         //[(row-1)*column+(column-1)];
+ }
 //13. Реализовать алгоритм Гаусса приведения матрицы к диагональному виду
 //14. Реализовать вычисление определителя квадратной матрицы
 
@@ -197,6 +213,7 @@ int main()
     int** D;
     int** C;
     int** V;
+    //int** Da;
     int row, column, yr_const=0, number=1;
     int row1, column1, row2, column2;
     int rowFirst, colFirst, rowSec, colSec;
@@ -204,7 +221,7 @@ int main()
     std::cout << "razmer row and column:\n";
     std::cin >> row >> column;
 
-
+    //Da = createDependentArray(row,column);
     V = createArray(row, column); 
     std::cout << "----------------------4.E matrix -------------------------------" << std::endl;
     D=eMatrix(V, row, column);
@@ -299,6 +316,18 @@ int main()
     std::cout << getElement(A, yourRow, yourColumn);
     std::cout << std::endl;
 
+    /*std::cout << "---------------------12. get element **-----------------------------" << std::endl;
+
+    fillarrRandom(Da, row, column);
+    printArray(Da, row, column);
+    std::cout << std::endl;
+
+    std::cout << "input index of element:\n";
+    std::cin >> yourRow >> yourColumn;
+    std::cout << getElement1(Da, yourRow, yourColumn);
+    std::cout << std::endl;*/
+
+    //deleteArray(Da, row, column);
     deleteArray(C, row1, column2);
     deleteArray(V, row, column);
     deleteArray(B, row, column);
