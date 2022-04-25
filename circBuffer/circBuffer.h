@@ -1,21 +1,24 @@
 #pragma once
 #include "Arr.h"
+#include "marker.h"
 
 template<typename T>
 class circBuf {
 private:
 	Arr <T> storage;
-	//long long int cur_pos;
-  
+	marker<T> cur_pos;
 public:
-	circBuf(size_t raz):storage(raz) {}
-	void put(const& T val) {
-		storage.addElement(const& T val);
+	circBuf(size_t size) {
+		Arr<T> storage(size);
+		marker<T> cur_pos(&(storage[0]));
+	}
+	void put(T val) {
+		
+		storage.replaceElement((cur_pos.get_pos()-&(storage[0])) %storage.getSize(), val);
+		++cur_pos;
 	};
-	const T& get (size_t index )const {
-		if (index >= 0)
-			return storage[index % raz];
-		else
-			throw "index < 0";
+	const T& get ()const {
+			return storage[cur_pos % storage.getSize()];
+		
 	};
 };
