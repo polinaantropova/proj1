@@ -5,6 +5,7 @@ class Dictionary {
 	From word_;
 	To translate_;
 public:
+	//TODO: в случае шаблона продумать инициализацию в конструкторе по умолчанию
 	Dictionary() : word_(""), translate_("") {}
 	Dictionary(const From& word, const To& translate) :
 		word_(word), translate_(translate) {}
