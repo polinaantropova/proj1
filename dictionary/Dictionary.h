@@ -1,11 +1,12 @@
 #pragma once
 
-template <typename T>
+template <typename From, typename To>
 class Dictionary {
-	T word_, translate_;
+	From word_;
+	To translate_;
 public:
 	Dictionary() : word_(""), translate_("") {}
-	Dictionary(const T& word, const T& translate) :
+	Dictionary(const From& word, const To& translate) :
 		word_(word), translate_(translate) {}
 
 	Dictionary(const Dictionary& X) : word_(X.word_), translate_(X.translate_) {}
@@ -28,11 +29,8 @@ public:
 		return*this;
 	}
 
-	const T& get_word() const { return word_; }
-	const T& get_translate() const { return translate_; }
-
-  //TODO сравнение слов (объектов произвольного типа Т) должно быть реализовано
-
+	const From& get_word() const { return word_; }
+	const To& get_translate() const { return translate_; }
 	bool operator==(const Dictionary& X)const { return word_ == X.word_; }
 	bool operator!=(const Dictionary& X)const { return word_ != X.word_; }
 	bool operator<(const Dictionary& X)const { return word_ < X.word_; }
